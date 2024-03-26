@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cv37ve5b71nkd"]
+[gd_scene load_steps=6 format=3 uid="uid://cv37ve5b71nkd"]
 
 [ext_resource type="Texture2D" uid="uid://bhvxr5sl6tuti" path="res://tileset/terrain_tiles24.png" id="1_6o15r"]
 [ext_resource type="PackedScene" uid="uid://c3qbrxh0ccmkc" path="res://nodes/frog.tscn" id="2_cm8w8"]
@@ -75,6 +75,10 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_iu512")
 
+[sub_resource type="Curve" id="Curve_2ib0h"]
+_data = [Vector2(0, 0), 0.0, 3.16489, 0, 0, Vector2(1, 1), -5.0664e-07, 0.0, 0, 0]
+point_count = 2
+
 [node name="Main" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -87,4 +91,7 @@ layer_0/tile_data = PackedInt32Array(327671, 131072, 4, 327672, 131072, 4, 32767
 zoom = Vector2(2, 2)
 
 [node name="Frog" parent="." instance=ExtResource("2_cm8w8")]
-position = Vector2(176, 17)
+position = Vector2(-16, 144)
+scale = Vector2(0.254567, 0.254567)
+time = 0.5
+curve = SubResource("Curve_2ib0h")
