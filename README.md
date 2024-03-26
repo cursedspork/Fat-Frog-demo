@@ -1,2 +1,4 @@
 # Fat Frog demo
- fat frog
+
+
+This is a small demo project where we recreate a frogger game to practice Godot

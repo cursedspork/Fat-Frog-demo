@@ -75,8 +75,8 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_iu512")
 
-[sub_resource type="Curve" id="Curve_2ib0h"]
-_data = [Vector2(0, 0), 0.0, 3.16489, 0, 0, Vector2(1, 1), -5.0664e-07, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_qnx6i"]
+_data = [Vector2(0, 0), 0.0, 2.73588, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="Main" type="Node2D"]
@@ -93,5 +93,5 @@ zoom = Vector2(2, 2)
 [node name="Frog" parent="." instance=ExtResource("2_cm8w8")]
 position = Vector2(-16, 144)
 scale = Vector2(0.254567, 0.254567)
-time = 0.5
-curve = SubResource("Curve_2ib0h")
+jump_time = 0.2
+jump_curve = SubResource("Curve_qnx6i")
