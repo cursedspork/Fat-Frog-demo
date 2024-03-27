@@ -1,25 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3qbrxh0ccmkc"]
+[gd_scene load_steps=7 format=3 uid="uid://c3qbrxh0ccmkc"]
 
 [ext_resource type="Texture2D" uid="uid://ulosfxlehwoj" path="res://sprites/frog 1.png" id="1_h5jel"]
 [ext_resource type="Script" path="res://nodes/frog_script.gd" id="1_yhs51"]
 [ext_resource type="AudioStream" uid="uid://csgnraytm2dem" path="res://sounds/stock_grass_3_single_step_3.wav" id="3_i7q2a"]
 [ext_resource type="AudioStream" uid="uid://b3j2v6rekpaps" path="res://sounds/stock_smack-1.wav" id="4_xmn2b"]
 
+[sub_resource type="Curve" id="Curve_msmb2"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_q1yjj"]
 radius = 16.2788
 
-[node name="Frog" type="Node2D" node_paths=PackedStringArray("jump_audio", "death_audio")]
+[node name="Frog" type="Node2D" node_paths=PackedStringArray("idle_sprite", "jump_audio", "death_audio")]
 script = ExtResource("1_yhs51")
+idle_sprite = NodePath("IdleSprite2D")
+jump_curve = SubResource("Curve_msmb2")
 jump_audio = NodePath("JumpAudioPlayer")
 death_audio = NodePath("DeathAudioPlayer")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="IdleSprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.046, 0.046)
 texture = ExtResource("1_h5jel")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="CrashArea2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrashArea2D"]
 shape = SubResource("CircleShape2D_q1yjj")
 
 [node name="JumpAudioPlayer" type="AudioStreamPlayer" parent="."]
@@ -29,4 +35,4 @@ stream = ExtResource("3_i7q2a")
 stream = ExtResource("4_xmn2b")
 volume_db = -0.11
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="CrashArea2D" to="." method="_on_area_2d_area_entered"]

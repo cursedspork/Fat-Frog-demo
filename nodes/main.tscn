@@ -107,7 +107,7 @@ jump_time = 0.2
 jump_curve = SubResource("Curve_qnx6i")
 
 [node name="Car" parent="." instance=ExtResource("3_be41h")]
-position = Vector2(-113, -17)
+position = Vector2(0, -124)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
