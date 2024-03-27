@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmb5qdtvcsoeb"]
+
+[ext_resource type="Texture2D" uid="uid://uowrv037nrn" path="res://sprites/stock_grey_square.png" id="1_4ku1s"]
+[ext_resource type="PackedScene" uid="uid://b5lv8yyowqmg2" path="res://nodes/car.tscn" id="1_08yk8"]
+
+[node name="Road" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(35.24, 1)
+texture = ExtResource("1_4ku1s")
+region_rect = Rect2(0, 0, 1, 1)
+
+[node name="Car" parent="." instance=ExtResource("1_08yk8")]
+position = Vector2(40, 0)
