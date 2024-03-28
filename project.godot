@@ -15,6 +15,10 @@ run/main_scene="res://nodes/main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [input]
 
 "jump forward"={
@@ -47,3 +51,4 @@ config/icon="res://icon.svg"
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_2d=3

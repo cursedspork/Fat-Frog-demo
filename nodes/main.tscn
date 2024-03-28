@@ -113,5 +113,6 @@ position = Vector2(0, -124)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+position_smoothing_enabled = true
 
 [connection signal="died" from="Frog" to="." method="_on_frog_died"]
