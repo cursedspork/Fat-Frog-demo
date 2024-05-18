@@ -4,6 +4,8 @@ signal died
 
 @export var idle_sprite: Sprite2D
 
+@export var step_area: Area2D
+
 @export_group("Jump Variables")
 @export var jump_dist: float = 32 ## Global jump distance in pixels 
 @export var jump_time: float = 1 ## Time to jump in seconds
@@ -31,12 +33,8 @@ func _process(_delta):
 	else:
 		global_position = last_jump_pos + (jump_dist * jump_dir)
 		is_jumping = false
-		#if(waiting_for_jump_dir != Vector2(0,0)):
-		#	jump_dir = waiting_for_jump_dir
-		#	start_jump()
-		#	waiting_for_jump_dir = Vector2(0,0)
-		#else:
-		#	is_jumping = false
+	print(step_area.get_overlapping_areas())
+	step_area.get_overlapping_areas()[0]
 
 func start_jump():
 	jump_audio.play()
@@ -50,11 +48,6 @@ func _input(event):
 		if event.is_action("jump forward"):
 			jump_dir = Vector2(0, -1)
 			start_jump()
-#		elif not is_waiting_for_jump and Time.get_ticks_msec() - last_time > (1000 * jump_time) / 2:
-#			is_waiting_for_jump = true
-#			await get_tree().create_timer((last_time + (1000 * jump_time) - Time.get_ticks_msec())/1000).timeout
-#			is_waiting_for_jump = false
-#			start_jump()
 		if event.is_action("jump back"):
 			jump_dir = Vector2(0, 1)
 			start_jump()
@@ -64,15 +57,6 @@ func _input(event):
 		if event.is_action("jump right"):
 			jump_dir = Vector2(1, 0)
 			start_jump()
-		##else:#if Time.get_ticks_msec() - last_time > (1000 * jump_time) / 2:
-		##	if event.is_action_pressed("jump forward"):
-		##		waiting_for_jump_dir = Vector2(0,-1)
-		##	if event.is_action_pressed("jump back"):
-		##		waiting_for_jump_dir = Vector2(0,1)
-		##	if event.is_action_pressed("jump left"):
-		##		waiting_for_jump_dir = Vector2(-1,0)
-		##	if event.is_action_pressed("jump right"):
-		##		waiting_for_jump_dir = Vector2(1,0)
 
 # when hit die
 func _on_area_2d_area_entered(_area):

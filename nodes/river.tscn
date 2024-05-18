@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://dab6keii67ldh"]
+[gd_scene load_steps=3 format=3 uid="uid://dab6keii67ldh"]
 
 [ext_resource type="Texture2D" uid="uid://5528ir0dvewo" path="res://sprites/stock_blue_square.png" id="1_kia0i"]
+[ext_resource type="PackedScene" uid="uid://cb2nuabkvbu3v" path="res://nodes/log.tscn" id="2_5imed"]
 
 [node name="River" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(40.31, 1)
 texture = ExtResource("1_kia0i")
+
+[node name="Log" parent="." instance=ExtResource("2_5imed")]
+position = Vector2(128, 0)
