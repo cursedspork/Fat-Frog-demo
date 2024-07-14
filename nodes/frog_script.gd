@@ -33,8 +33,8 @@ func _process(_delta):
 	else:
 		global_position = last_jump_pos + (jump_dist * jump_dir)
 		is_jumping = false
-	print(step_area.get_overlapping_areas())
-	step_area.get_overlapping_areas()[0]
+	if(step_area.get_overlapping_areas()):
+		print(step_area.get_overlapping_areas())
 
 func start_jump():
 	jump_audio.play()
