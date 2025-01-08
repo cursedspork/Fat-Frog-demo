@@ -20,6 +20,10 @@ var last_jump_pos: Vector2 = Vector2(0,0)
 #var waiting_for_jump_dir: Vector2 = Vector2(0,0)
 var is_jumping: bool = false
 var jump_dir: Vector2 = Vector2(0,0)
+var is_dead: bool = false
+
+var prev_float_pos: Vector2 = Vector2.ZERO
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,23 +32,32 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	# performs jump movement over time
-	if Time.get_ticks_msec() - 1000 * jump_time < last_time:
+	if is_dead:
+		return
+	
+	if Time.get_ticks_msec() - 1000 * jump_time < last_time: #is not jumping
 		global_position = last_jump_pos + (jump_curve.sample((Time.get_ticks_msec() - last_time)/(1000 * jump_time)) * jump_dist * jump_dir)
 	else:
-		global_position = last_jump_pos + (jump_dist * jump_dir)
+		if is_jumping:
+			global_position = last_jump_pos + (jump_dist * jump_dir)
 		is_jumping = false
-	if(step_area.get_overlapping_areas()):
-		print(step_area.get_overlapping_areas())
+		if(step_area.get_overlapping_areas() and step_area.get_overlapping_areas().front().is_in_group("FloatingArea")):
+			if prev_float_pos == Vector2.ZERO:
+				prev_float_pos = step_area.get_overlapping_areas().front().global_position
+			else:
+				global_position = global_position + (step_area.get_overlapping_areas().front().global_position - prev_float_pos)
+				prev_float_pos = step_area.get_overlapping_areas().front().global_position
 
 func start_jump():
 	jump_audio.play()
 	last_time = Time.get_ticks_msec()
 	last_jump_pos = global_position
 	is_jumping = true
+	prev_float_pos = Vector2.ZERO
 	idle_sprite.rotation = jump_dir.angle() + PI/2
 
 func _input(event):
-	if not is_jumping:
+	if not is_jumping and not is_dead:
 		if event.is_action("jump forward"):
 			jump_dir = Vector2(0, -1)
 			start_jump()
@@ -58,7 +71,11 @@ func _input(event):
 			jump_dir = Vector2(1, 0)
 			start_jump()
 
+func die():
+	death_audio.play()
+	is_dead = true
+	died.emit()
+
 # when hit die
 func _on_area_2d_area_entered(_area):
-	death_audio.play()
-	died.emit()
+	die()
