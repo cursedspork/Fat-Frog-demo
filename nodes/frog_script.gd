@@ -37,6 +37,22 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if not is_jumping and not is_dead:
+		if Input.is_action_pressed("jump forward"):
+			jump_dir = Vector2(0, -1)
+			start_jump()
+		if Input.is_action_pressed("jump back"):
+			jump_dir = Vector2(0, 1)
+			start_jump()
+		if Input.is_action_pressed("jump left"):
+			jump_dir = Vector2(-1, 0)
+			start_jump()
+		if Input.is_action_pressed("jump right"):
+			jump_dir = Vector2(1, 0)
+			start_jump()
+
+	
+	
 	# performs jump movement over time
 	if is_dead:
 		return
@@ -77,22 +93,6 @@ func get_curr_surface():
 		if abs(terr[0] - global_position.y) < jump_dist/2:
 			return terr[1]
 	return "grass"
-
-
-func _input(event):
-	if not is_jumping and not is_dead:
-		if event.is_action("jump forward"):
-			jump_dir = Vector2(0, -1)
-			start_jump()
-		if event.is_action("jump back"):
-			jump_dir = Vector2(0, 1)
-			start_jump()
-		if event.is_action("jump left"):
-			jump_dir = Vector2(-1, 0)
-			start_jump()
-		if event.is_action("jump right"):
-			jump_dir = Vector2(1, 0)
-			start_jump()
 
 func die(d_type):
 	if(d_type == "car"):
