@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b5lv8yyowqmg2"]
 
-[ext_resource type="Script" uid="uid://be0mppp88ylut" path="res://nodes/car_script.gd" id="1_6l8vg"]
+[ext_resource type="Script" path="res://nodes/car_script.gd" id="1_6l8vg"]
 [ext_resource type="Texture2D" uid="uid://yenc23odg7w1" path="res://sprites/truck/red pick up truck.png" id="2_emg8v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vj1mn"]

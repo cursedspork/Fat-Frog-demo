@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c3qbrxh0ccmkc"]
 
-[ext_resource type="Script" uid="uid://bs2u7leusys1p" path="res://nodes/frog_script.gd" id="1_yhs51"]
+[ext_resource type="Script" path="res://nodes/frog_script.gd" id="1_yhs51"]
 [ext_resource type="Texture2D" uid="uid://castj5nwa8fd5" path="res://sprites/frog/frog 1 new.png" id="2_l2hyh"]
 [ext_resource type="AudioStream" uid="uid://csgnraytm2dem" path="res://sounds/stock_grass_3_single_step_3.wav" id="3_i7q2a"]
 [ext_resource type="AudioStream" uid="uid://b3j2v6rekpaps" path="res://sounds/stock_smack-1.wav" id="4_xmn2b"]
