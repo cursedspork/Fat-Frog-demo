@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3qbrxh0ccmkc"]
+[gd_scene load_steps=11 format=3 uid="uid://c3qbrxh0ccmkc"]
 
 [ext_resource type="Script" path="res://nodes/frog_script.gd" id="1_yhs51"]
 [ext_resource type="Texture2D" uid="uid://castj5nwa8fd5" path="res://sprites/frog/frog 1 new.png" id="2_l2hyh"]
 [ext_resource type="AudioStream" uid="uid://csgnraytm2dem" path="res://sounds/stock_grass_3_single_step_3.wav" id="3_i7q2a"]
+[ext_resource type="AudioStream" uid="uid://clwcdomqpr4p2" path="res://sounds/stock_metallic-clang-04.wav" id="4_jqhxb"]
 [ext_resource type="AudioStream" uid="uid://b3j2v6rekpaps" path="res://sounds/stock_smack-1.wav" id="4_xmn2b"]
+[ext_resource type="AudioStream" uid="uid://bvsy507axagq4" path="res://sounds/stock_water-splash-01.wav" id="5_k8va4"]
+[ext_resource type="AudioStream" uid="uid://dflutqeh7e6ty" path="res://sounds/stock_cling-02.wav" id="5_lwvm2"]
 
 [sub_resource type="Curve" id="Curve_msmb2"]
 _data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -15,14 +18,17 @@ radius = 13.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbrr3"]
 radius = 2.0
 
-[node name="Frog" type="Node2D" node_paths=PackedStringArray("idle_sprite", "step_area", "jump_audio", "death_audio")]
+[node name="Frog" type="Node2D" node_paths=PackedStringArray("idle_sprite", "step_area", "jump_grass_audio", "jump_road_audio", "jump_log_audio", "hit_car_audio", "hit_water_audio")]
 z_index = 2
 script = ExtResource("1_yhs51")
 idle_sprite = NodePath("IdleSprite2D")
 step_area = NodePath("StepArea2D")
 jump_curve = SubResource("Curve_msmb2")
-jump_audio = NodePath("JumpAudioPlayer")
-death_audio = NodePath("DeathAudioPlayer")
+jump_grass_audio = NodePath("Sounds/JumpGrassAudioPlayer")
+jump_road_audio = NodePath("Sounds/JumpRoadAudioPlayer")
+jump_log_audio = NodePath("Sounds/JumpLogAudioPlayer")
+hit_car_audio = NodePath("Sounds/HitCarAudioPlayer")
+hit_water_audio = NodePath("Sounds/HitWaterAudioPlayer")
 
 [node name="IdleSprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.017, 0.017)
@@ -33,13 +39,6 @@ texture = ExtResource("2_l2hyh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrashArea2D"]
 shape = SubResource("CircleShape2D_q1yjj")
 
-[node name="JumpAudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_i7q2a")
-
-[node name="DeathAudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_xmn2b")
-volume_db = -0.11
-
 [node name="StepArea2D" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 16
@@ -47,5 +46,22 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StepArea2D"]
 shape = SubResource("CircleShape2D_tbrr3")
 debug_color = Color(0.490196, 0.584314, 0, 0.419608)
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="JumpGrassAudioPlayer" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("3_i7q2a")
+
+[node name="JumpRoadAudioPlayer" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_jqhxb")
+
+[node name="JumpLogAudioPlayer" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_lwvm2")
+
+[node name="HitCarAudioPlayer" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_xmn2b")
+
+[node name="HitWaterAudioPlayer" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_k8va4")
 
 [connection signal="area_entered" from="CrashArea2D" to="." method="_on_area_2d_area_entered"]
